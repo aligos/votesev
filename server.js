@@ -9,7 +9,7 @@ const { printSchema } = require('graphql/utilities/schemaPrinter');
 const { subscriptionManager } = require('./data/subscriptions');
 const schema = require('./data/schema');
 
-// dodol
+const port = process.env.PORT
 const graphQLServer = express().use('*', cors());
 
 graphQLServer.use('/graphql', bodyParser.json(), graphqlExpress({
