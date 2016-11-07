@@ -9,7 +9,7 @@ const { printSchema } = require('graphql/utilities/schemaPrinter');
 const { subscriptionManager } = require('./data/subscriptions');
 const schema = require('./data/schema');
 
-const port = process.env.PORT
+
 const graphQLServer = express().use('*', cors());
 
 graphQLServer.use('/graphql', bodyParser.json(), graphqlExpress({
@@ -26,7 +26,7 @@ graphQLServer.use('/schema', (req, res) => {
   res.send(printSchema(schema));
 });
 
-graphQLServer.listen(port);
+graphQLServer.listen(8080);
 
 // WebSocket server for subscriptions
 const websocketServer = createServer((request, response) => {
@@ -34,7 +34,7 @@ const websocketServer = createServer((request, response) => {
   response.end();
 });
 
-websocketServer.listen(port);
+websocketServer.listen(8090);
 
 // eslint-disable-next-line
 new SubscriptionServer(
