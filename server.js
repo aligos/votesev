@@ -1,16 +1,14 @@
-import express from 'express';
-import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import { createServer } from 'http';
-import { SubscriptionServer } from 'subscriptions-transport-ws';
-import { printSchema } from 'graphql/utilities/schemaPrinter';
+const express = require('express');
+const { graphqlExpress, graphiqlExpress } = require('graphql-server-express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const { createServer } = require('http');
+const { SubscriptionServer } = require('subscriptions-transport-ws');
+const { printSchema } = require('graphql/utilities/schemaPrinter');
 
-import { subscriptionManager } from './data/subscriptions';
-import schema from './data/schema';
+const { subscriptionManager } = require('./data/subscriptions');
+const schema = require('./data/schema');
 
-const GRAPHQL_PORT = 8080;
-const WS_PORT = 8090;
 
 const graphQLServer = express().use('*', cors());
 
@@ -28,9 +26,7 @@ graphQLServer.use('/schema', (req, res) => {
   res.send(printSchema(schema));
 });
 
-graphQLServer.listen(GRAPHQL_PORT, () => console.log(
-  `GraphQL Server is now running on http://localhost:${GRAPHQL_PORT}/graphql`
-));
+graphQLServer.listen(8080);
 
 // WebSocket server for subscriptions
 const websocketServer = createServer((request, response) => {
@@ -38,9 +34,7 @@ const websocketServer = createServer((request, response) => {
   response.end();
 });
 
-websocketServer.listen(WS_PORT, () => console.log( // eslint-disable-line no-console
-  `Websocket Server is now running on http://localhost:${WS_PORT}`
-));
+websocketServer.listen(8090);
 
 // eslint-disable-next-line
 new SubscriptionServer(

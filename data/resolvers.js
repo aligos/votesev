@@ -1,5 +1,5 @@
-import { find, filter } from 'lodash';
-import { pubsub } from './subscriptions';
+const { find, filter } = require('lodash');
+const { pubsub } = require('./subscriptions');
 
 const types = [
   { id: 1, title: 'Water' },
@@ -46,4 +46,4 @@ const resolveFunctions = {
   },
 };
 
-export default resolveFunctions;
+module.exports = resolveFunctions;
