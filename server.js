@@ -26,7 +26,7 @@ graphQLServer.use('/schema', (req, res) => {
   res.send(printSchema(schema));
 });
 
-graphQLServer.listen(8080);
+graphQLServer.listen(port);
 
 // WebSocket server for subscriptions
 const websocketServer = createServer((request, response) => {
@@ -34,7 +34,7 @@ const websocketServer = createServer((request, response) => {
   response.end();
 });
 
-websocketServer.listen(8090);
+websocketServer.listen(port);
 
 // eslint-disable-next-line
 new SubscriptionServer(
